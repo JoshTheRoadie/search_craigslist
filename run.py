@@ -7,6 +7,7 @@ import config
 URL_TEMPLATE = 'https://{}.craigslist.org'
 DATE_STRIP_FORMAT = '%Y-%m-%d %H:%M'
 
+
 if __name__ == '__main__':
     try:
         config_key = sys.argv[1]
@@ -24,6 +25,8 @@ if __name__ == '__main__':
 
     while True:
         print 'Process running.....................................................................'
+        print 'Process will run every {} seconds.'.format(str(config.SLEEP_TIME))
+        print 'The current item being searched is {}.'.format(config_key)
         if tracker.last_post_date:
             last_post = tracker.last_post_date
         else:
@@ -39,4 +42,4 @@ if __name__ == '__main__':
                 print 'There are no new posts at this time.'
         else:
             print 'Last attempt to connect failed.'
-        time.sleep(300)
+        time.sleep(config.SLEEP_TIME)

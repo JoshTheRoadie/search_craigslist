@@ -5,6 +5,16 @@ from operator import attrgetter
 Post = collections.namedtuple('Post', ['title', 'price', 'date', 'url', 'area'])
 
 
+def strip_unicode(word):
+    """
+    Returns a string with non-ascii characters stripped from it.
+    :param word: str
+    :return: str, ascii only
+    """
+    clean_string = ''
+    return ''.join([clean_string + letter for letter in word if ord(letter) < 128])
+
+
 def post_to_string(post):
     """
     Returns a human readable string for a result_tracker.Post
@@ -13,8 +23,8 @@ def post_to_string(post):
     """
     output_format = 'Title: {}\nPrice: {}\nDate: {}\nPost URL: {}\nArea: {}\n\n'
 
-    title, price, date, url, area = post
-    return output_format.format(title, price, date, url, area)
+    cleaned_strings = [strip_unicode(str(post_data)) for post_data in post]
+    return output_format.format(*cleaned_strings)
 
 
 class ResultTracker(object):

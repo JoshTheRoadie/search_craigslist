@@ -1,3 +1,4 @@
+SLEEP_TIME = 3600
 query_data = {
     'guitar': {
         'location': 'Austin',
